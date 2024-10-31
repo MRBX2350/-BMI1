@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณ BMI</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/background/20230121/original/pngtree-background-green-abstract-hd-picture-image_2024738.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>คำนวณหาค่าดัชนีมวลกาย (BMI)</h1>
+        <label for="height">ส่วนสูง (เซนติเมตร):</label>
+        <input type="number" id="height" placeholder="ใส่ส่วนสูงของคุณ">
+
+        <label for="weight">น้ำหนัก (กิโลกรัม):</label>
+        <input type="number" id="weight" placeholder="ใส่น้ำหนักของคุณ">
+
+        <button onclick="calculateBMI()">คำนวณ</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById("height").value) / 100; // แปลงเซนติเมตรเป็นเมตร
+            const weight = parseFloat(document.getElementById("weight").value);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                document.getElementById("result").textContent = "กรุณาใส่ค่าน้ำหนักและส่วนสูงที่ถูกต้อง";
+                return;
+            }
+
+            const bmi = (weight / (height * height)).toFixed(2);
+            let status;
+
+            if (bmi < 18.5) {
+                status = "น้ำหนักน้อยกว่ามาตรฐาน";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                status = "น้ำหนักอยู่ในเกณฑ์ปกติ";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                status = "น้ำหนักเกิน";
+            } else if (bmi >= 29.9 && bmi < 100){
+                status = "อ้วน";
+            }
+
+            document.getElementById("result").textContent = `ค่า BMI ของคุณคือ ${bmi} (${status})`;
+        }
+    </script>
+</body>
+</html>
